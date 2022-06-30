@@ -11,9 +11,12 @@ import CoreData
 struct ContentView: View {
     // MARK: - Properties
     @State private var showingAddTodoView: Bool = false
+    @State private var showingSettingsView: Bool = false
     @State private var animatingButton: Bool = false
     
     @Environment(\.managedObjectContext) var viewContext
+    
+    @EnvironmentObject var iconSettings: IconNames
     
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Todo.name, ascending: true)],
@@ -42,9 +45,15 @@ struct ContentView: View {
                 }
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        Button(action: addItem) {
-                            Label("Add Item", systemImage: "plus")
+                        Button {
+                        self.showingSettingsView.toggle()
+                        } label: {
+                            Label("Add Item", systemImage: "paintbrush")
                         }
+                        .sheet(isPresented: $showingSettingsView) {
+                            SettingsView().environmentObject(self.iconSettings)
+                        }
+
                     }
                     ToolbarItem(placement: .navigationBarLeading) {
                         EditButton()
