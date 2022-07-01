@@ -13,6 +13,9 @@ struct SettingsView: View {
     
     @EnvironmentObject var iconSettings: IconNames
     
+    let themes: [Theme] = themeData
+    @ObservedObject var theme = ThemeSettings.shared
+    
     // MARK: - Body
     var body: some View {
         NavigationView {
@@ -66,6 +69,32 @@ struct SettingsView: View {
                         Text("Choose the app icon")
                     }
                     .padding(.vertical, 3)
+                    
+                    Section {
+                        ForEach(themes, id: \.id) { theme in
+                            Button {
+                                self.theme.themeSettings = theme.id
+                                UserDefaults.standard.set(self.theme.themeSettings, forKey: "Theme")
+                            } label: {
+                                HStack {
+                                    Image(systemName: "circle.fill")
+                                        .foregroundColor(theme.themeColor)
+                                    Text(theme.themeName)
+                                }
+                            }
+                            .accentColor(.primary)
+                        }
+                    } header: {
+                        HStack {
+                            Text("Choose the app theme")
+                            Image(systemName: "circle.fill")
+                                .resizable()
+                                .frame(width: 10, height: 10)
+                                .foregroundColor(themes[self.theme.themeSettings].themeColor)
+                        }
+                    }
+                    .padding(.vertical, 3)
+
 
                     Section {
                         FormRowLinkView(icon: "globe", color: .pink, text: "Website", link: "https://google.it")
@@ -109,6 +138,8 @@ struct SettingsView: View {
             .background(Color("ColorBackground")
                 .edgesIgnoringSafeArea(.all))
         } //: NavigationView
+        .accentColor(themes[self.theme.themeSettings].themeColor)
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 

@@ -24,6 +24,8 @@ struct ContentView: View {
     
     private var todos: FetchedResults<Todo>
     
+    @ObservedObject var theme = ThemeSettings.shared
+    var themes: [Theme] = themeData
     
     // MARK: - Body
     var body: some View {
@@ -35,10 +37,23 @@ struct ContentView: View {
                             Text("Item \(todo.name!)")
                         } label: {
                             HStack {
+                                Circle()
+                                    .frame(width: 12, height: 12, alignment: .center)
+                                    .foregroundColor(self.colorize(priority: todo.priority ?? "Normal"))
                                 Text(todo.name ?? "Unknown")
+                                    .fontWeight(.semibold)
                                 Spacer()
                                 Text(todo.priority ?? "Unknown")
+                                    .font(.footnote)
+                                    .foregroundColor(Color(UIColor.systemGray2))
+                                    .padding(3)
+                                    .frame(minWidth: 62)
+                                    .overlay(
+                                        Capsule()
+                                            .stroke(Color(UIColor.systemGray2), lineWidth: 0.75)
+                                    )
                             }
+                            .padding(.vertical, 10)
                         }
                     }
                     .onDelete(perform: deleteTodo)
@@ -53,10 +68,12 @@ struct ContentView: View {
                         .sheet(isPresented: $showingSettingsView) {
                             SettingsView().environmentObject(self.iconSettings)
                         }
+                        .accentColor(themes[self.theme.themeSettings].themeColor)
 
                     }
                     ToolbarItem(placement: .navigationBarLeading) {
                         EditButton()
+                            .accentColor(themes[self.theme.themeSettings].themeColor)
                     }
                 }
                 .navigationTitle("Todo")
@@ -72,12 +89,12 @@ struct ContentView: View {
                 ZStack {
                     Group {
                         Circle()
-                            .fill(.blue)
+                            .fill(themes[self.theme.themeSettings].themeColor)
                             .opacity(self.animatingButton ? 0.2 : 0)
                             .scaleEffect(self.animatingButton ? 1 : 0)
                             .frame(width: 68, height: 68, alignment: .center)
                         Circle()
-                            .fill(.blue)
+                            .fill(themes[self.theme.themeSettings].themeColor)
                             .opacity(self.animatingButton ? 0.15 : 0)
                             .scaleEffect(self.animatingButton ? 1 : 0)
                             .frame(width: 88, height: 88, alignment: .center)
@@ -92,6 +109,7 @@ struct ContentView: View {
                             .background(Circle().fill(Color("ColorBase")))
                             .frame(width: 48, height: 48, alignment: .center)
                     }) //: Button
+                    .accentColor(themes[self.theme.themeSettings].themeColor)
                     .onAppear {
                         DispatchQueue.main.async {
                             self.animatingButton.toggle()
@@ -103,6 +121,7 @@ struct ContentView: View {
                 , alignment: .bottomTrailing
             )
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
     
     private func addItem() {
@@ -121,6 +140,19 @@ struct ContentView: View {
                 let nsError = error as NSError
                 fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
+        }
+    }
+    
+    private func colorize(priority: String) -> Color {
+        switch priority {
+        case "High":
+            return .pink
+        case "Normal":
+            return .green
+        case "Low":
+            return .blue
+        default:
+            return .gray
         }
     }
 }

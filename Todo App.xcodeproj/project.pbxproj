@@ -28,6 +28,9 @@
 		6B8C715C2853F4F300951DD6 /* Todo_App.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6B8C715A2853F4F300951DD6 /* Todo_App.xcdatamodeld */; };
 		6B8C71642853F61D00951DD6 /* AddTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8C71632853F61D00951DD6 /* AddTodoView.swift */; };
 		6B8C7167285A93B800951DD6 /* EmptyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B8C7166285A93B700951DD6 /* EmptyListView.swift */; };
+		6BA3D19C286E5F6100589D07 /* ThemeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA3D19B286E5F6100589D07 /* ThemeModel.swift */; };
+		6BA3D19E286E5FBA00589D07 /* ThemeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA3D19D286E5FBA00589D07 /* ThemeData.swift */; };
+		6BA3D1A0286E602F00589D07 /* ThemeSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA3D19F286E602F00589D07 /* ThemeSettings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +57,9 @@
 		6B8C71632853F61D00951DD6 /* AddTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoView.swift; sourceTree = "<group>"; };
 		6B8C71652859397900951DD6 /* Todo-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Todo-App-Info.plist"; sourceTree = SOURCE_ROOT; };
 		6B8C7166285A93B700951DD6 /* EmptyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyListView.swift; sourceTree = "<group>"; };
+		6BA3D19B286E5F6100589D07 /* ThemeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeModel.swift; sourceTree = "<group>"; };
+		6BA3D19D286E5FBA00589D07 /* ThemeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeData.swift; sourceTree = "<group>"; };
+		6BA3D19F286E602F00589D07 /* ThemeSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeSettings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +116,7 @@
 		6B8C714E2853F4EE00951DD6 /* Todo App */ = {
 			isa = PBXGroup;
 			children = (
+				6BA3D19A286E5F4B00589D07 /* Theme */,
 				6B44CF5C286D01BB002DB9ED /* Models */,
 				6B44CF49286CFA3A002DB9ED /* Icons */,
 				6B8C71652859397900951DD6 /* Todo-App-Info.plist */,
@@ -142,6 +149,16 @@
 				6B44CF47286BA969002DB9ED /* FormRowLinkView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		6BA3D19A286E5F4B00589D07 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				6BA3D19B286E5F6100589D07 /* ThemeModel.swift */,
+				6BA3D19D286E5FBA00589D07 /* ThemeData.swift */,
+				6BA3D19F286E602F00589D07 /* ThemeSettings.swift */,
+			);
+			path = Theme;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -224,8 +241,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				6B44CF44286B53E6002DB9ED /* SettingsView.swift in Sources */,
+				6BA3D1A0286E602F00589D07 /* ThemeSettings.swift in Sources */,
 				6B44CF46286B56DF002DB9ED /* FormRowStaticView.swift in Sources */,
 				6B44CF48286BA969002DB9ED /* FormRowLinkView.swift in Sources */,
+				6BA3D19E286E5FBA00589D07 /* ThemeData.swift in Sources */,
+				6BA3D19C286E5F6100589D07 /* ThemeModel.swift in Sources */,
 				6B8C71592853F4F300951DD6 /* Persistence.swift in Sources */,
 				6B8C71522853F4EE00951DD6 /* ContentView.swift in Sources */,
 				6B8C7167285A93B800951DD6 /* EmptyListView.swift in Sources */,
